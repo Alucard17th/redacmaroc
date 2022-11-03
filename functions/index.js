@@ -34,4 +34,8 @@ exports.AddUserRole = functions.auth.user().onCreate(async (authUser) => {
 
   }
 
-});
+}
+);
+
+
+

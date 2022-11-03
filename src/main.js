@@ -15,6 +15,9 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/vue-editor'
+
 const firebaseConfig = {
   apiKey: "AIzaSyA-4XqG-LzYeXLWRlEbP2m2pePznUTf3EU",
   authDomain: "redacma-294da.firebaseapp.com",
@@ -26,14 +29,16 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+
 export const db = firebase.firestore()
 
 Vue.use(VueRouter)
 Vue.use(store)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.use(Editor)
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes : routes,
 })
 

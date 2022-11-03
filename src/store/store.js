@@ -4,10 +4,8 @@ import Vue from 'vue'
 
 import {users} from './modules/user'
 import {orders} from './modules/order'
-
-// import {spaces} from './modules/spaces'
-// import {folders} from './modules/folders'
-// import {teams} from './modules/teams'
+import {tests} from './modules/test'
+import {manager} from './modules/admin'
 
 Vue.use(Vuex)
 
@@ -31,9 +29,7 @@ const mutations = {
 }
 
 const getters = {
-  getSnackBar: (state) => {
-    return state.snackbar
-  },
+  getSnackBar: (state) => {return state.snackbar},
   active: (state) => (state.open.length > 0 ? state.open[0] : null),
   allOpen: (state) => state.open,
 }
@@ -41,15 +37,17 @@ const getters = {
 const store = new Vuex.Store({
   state: {
     snackbar: {},
-    isHomeNavigationDrawerOpen: true,
     open:[],
+    can_admin: false
   },
   getters: getters,
   mutations: mutations,
   actions: actions,
   modules: {
     users: users,
-    orders: orders
+    orders: orders,
+    tests:tests,
+    manager:manager
   }
 })
 

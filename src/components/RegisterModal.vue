@@ -133,6 +133,28 @@
       <b-button class="mt-3" variant="outline-danger" block @click="hideModal('simple2')">Close Me</b-button>
     </b-modal>
 
+    <b-modal :visible="modal3Visible" @hide="onHide" id="simple3" ref="my-psreset-modal" hide-footer hide-header-close title="Rédacteur registration" size="xl"> 
+      <div class="d-block text-center">
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+          <h1>Password Reset...</h1>
+          <b-form-group id="input-group-1">
+            <b-row>
+              <b-col cols="4" class="text-left"><label label-for="input-1">Email address:</label></b-col>
+              <b-col cols="8" ><b-form-input id="input-1" v-model="pform.email" type="email" placeholder="Enter email" required></b-form-input></b-col>
+            </b-row>
+          </b-form-group>
+
+          <b-button type="submit" variant="primary" class="mr-3" @click="resetPassword">Submit</b-button>
+          <b-button type="reset" variant="danger">Reset</b-button>
+        </b-form>
+
+        <b-card class="mt-3" header="Form Data Result">
+          <pre class="m-0">{{ pform }}</pre>
+        </b-card>
+      </div>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModal('simple3')">Close Me</b-button>
+    </b-modal>
+
   </div>
 
 </template>
@@ -168,6 +190,9 @@ export default {
         checked: [],
         role:'redactor'
       },
+      pform:{
+        email: '',
+      },
       allcountries: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
       show: true,
       showBuyer: true
@@ -188,6 +213,9 @@ export default {
     },
     modal2Visible() {
       return this.$store.getters.active === 'simple2';
+    },
+    modal3Visible() {
+      return this.$store.getters.active === 'simple3';
     },
     countries () {
       const list = countries.getNames('en', { select: 'official' })
@@ -250,6 +278,9 @@ export default {
     },
     registerWriter(){
       this.$store.dispatch('registerUser', {email : this.sform.email, password : this.sform.password, role:this.sform.role})
+    },
+    resetPassword(){
+      this.$store.dispatch('resetPassword', this.pform.email)
     }
     
   }
